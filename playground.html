@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pipeline Playground — Bagus Budi Laksono</title>
+  <meta name="description" content="Break a PySpark-style pipeline on purpose: turn reliability guards off and watch the parity check against legacy output catch it. Runs entirely in your browser.">
+  <meta name="theme-color" content="#0a0e16">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0e16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='700' font-size='28' fill='%2322d3ee'%3EBB%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/playground.css">
+  <script>
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body class="pg">
+  <header class="nav is-scrolled">
+    <div class="nav__inner">
+      <a href="./" class="brand" aria-label="Back to CV"><span class="brand__mark">BB</span><span class="brand__name">Bagus Budi Laksono</span></a>
+      <nav class="nav__links pg-nav" aria-label="Pages">
+        <a href="./#migration">← Back to CV</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle light/dark theme">
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap pg-main" id="main">
+    <header class="pg-head">
+      <p class="kicker">Sandbox</p>
+      <h1>Pipeline Playground</h1>
+      <p class="section__sub">
+        Same job as the walkthrough on the CV: <code>orders.dat</code> → reformat → filter → join → rollup → <code>sales_by_store</code>.
+        <b>Break it on purpose.</b> Edit the data, switch the reliability guards off, hit <b>Run</b>, and watch the
+        parity check against the legacy output catch it. Everything runs in your browser.
+      </p>
+      <p class="nda-note"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        Fictional coffee-shop data. The engine is a small JavaScript model of Spark SQL semantics (NULL logic, casts, joins), not a Spark cluster.</p>
+    </header>
+
+    <div class="pg-grid">
+      <!-- ===== Inputs ===== -->
+      <section class="panel pg-card" aria-labelledby="inTitle">
+        <div class="panel__bar">
+          <span class="tag tag--legacy">INPUT</span>
+          <h2 class="panel__title" id="inTitle">landing/orders/</h2>
+        </div>
+        <div class="pg-pad">
+          <div class="pg-presets" role="group" aria-label="Load sample data">
+            <span>Load:</span>
+            <button class="chip" type="button" data-preset="messy">Messy day</button>
+            <button class="chip" type="button" data-preset="clean">Clean day</button>
+            <button class="chip" type="button" data-preset="broken">Broken file</button>
+          </div>
+          <label class="pg-label" for="orders">orders.dat <small>ticket_no | store_id | sku | sold_at (yyyyMMddHHmmss) | line_amount</small></label>
+          <textarea id="orders" class="pg-text" rows="14" spellcheck="false" wrap="off"></textarea>
+          <label class="pg-label" for="catalog">ref.sku_catalog <small>sku | bean_origin</small></label>
+          <textarea id="catalog" class="pg-text pg-text--small" rows="4" spellcheck="false" wrap="off"></textarea>
+        </div>
+      </section>
+
+      <!-- ===== Config ===== -->
+      <section class="panel pg-card" aria-labelledby="cfgTitle">
+        <div class="panel__bar">
+          <span class="tag tag--spark">PYSPARK</span>
+          <h2 class="panel__title" id="cfgTitle">coffee_sales_summary.py · settings</h2>
+        </div>
+        <div class="pg-pad pg-cfg">
+          <fieldset>
+            <legend>Read mode</legend>
+            <div class="seg">
+              <label><input type="radio" name="mode" value="FAILFAST" checked><span>FAILFAST</span></label>
+              <label><input type="radio" name="mode" value="PERMISSIVE"><span>PERMISSIVE</span></label>
+            </div>
+            <p class="pg-help">Malformed line (wrong field count): stop the job, or fill the gaps with NULL and keep going?</p>
+          </fieldset>
+
+          <div class="guards">
+            <p class="guards__title">Reliability guards <small>(all on = matches legacy)</small></p>
+            <label class="switch"><input type="checkbox" id="optTrim" checked><span class="switch__ui" aria-hidden="true"></span>
+              <span><b>Normalize keys</b> <code>upper(trim(sku))</code><small>Legacy trims and upper-cases the SKU before the lookup.</small></span></label>
+            <label class="switch"><input type="checkbox" id="optDecimal" checked><span class="switch__ui" aria-hidden="true"></span>
+              <span><b>Exact money</b> <code>decimal(18,2)</code><small>Off = cast to <code>float</code>. Binary floats can't store most cents exactly.</small></span></label>
+            <label class="switch"><input type="checkbox" id="optNullSafe" checked><span class="switch__ui" aria-hidden="true"></span>
+              <span><b>Null-safe filter</b> <code>coalesce(cond, false)</code><small>Off = a NULL condition is neither true nor false, so the row lands in neither output.</small></span></label>
+          </div>
+
+          <fieldset>
+            <legend>Lookup join</legend>
+            <div class="seg">
+              <label><input type="radio" name="join" value="left" checked><span>left</span></label>
+              <label><input type="radio" name="join" value="inner"><span>inner</span></label>
+            </div>
+            <p class="pg-help">Legacy keeps orders whose SKU isn't in the catalog (outer join).</p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Business rules <small>(the spec: legacy follows these too)</small></legend>
+            <label class="pg-inline">Reject when <code>line_amount</code> &lt; <input type="number" id="optMin" value="0" step="1000" inputmode="decimal"></label>
+            <div class="pg-inline">Group by:
+              <label class="cb"><input type="checkbox" checked disabled> sale_date</label>
+              <label class="cb"><input type="checkbox" id="optByStore" checked> store_id</label>
+              <label class="cb"><input type="checkbox" id="optByOrigin" checked> bean_origin</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Write mode</legend>
+            <div class="seg">
+              <label><input type="radio" name="write" value="overwrite" checked><span>partition overwrite</span></label>
+              <label><input type="radio" name="write" value="append"><span>append</span></label>
+            </div>
+            <p class="pg-help">Try <b>append</b>, then press Run twice: that's a retry after a failure.</p>
+          </fieldset>
+
+          <div class="pg-actions">
+            <button class="btn btn--primary" id="runBtn" type="button">▶ Run job</button>
+            <button class="btn btn--ghost" id="resetTableBtn" type="button">Reset target table</button>
+            <button class="btn btn--ghost" id="resetAllBtn" type="button">Restore defaults</button>
+          </div>
+          <p class="pg-runinfo" id="runInfo" aria-live="polite">Target table is empty. Press Run.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===== Stage counters ===== -->
+    <ol class="stages" id="stages" aria-label="Pipeline stages">
+      <li data-stage="input"><span>INPUT FILE</span><b>–</b><small>rows read</small></li>
+      <li data-stage="reformat"><span>REFORMAT</span><b>–</b><small>cast &amp; clean</small></li>
+      <li data-stage="filter"><span>FILTER</span><b>–</b><small>valid</small></li>
+      <li data-stage="join"><span>JOIN</span><b>–</b><small>enriched</small></li>
+      <li data-stage="rollup"><span>ROLLUP</span><b>–</b><small>groups</small></li>
+      <li data-stage="write"><span>WRITE</span><b>–</b><small>rows in partitions</small></li>
+    </ol>
+
+    <div class="pg-grid pg-grid--results">
+      <!-- ===== Results ===== -->
+      <section class="panel pg-card pg-results" aria-label="Results">
+        <div class="verdict" id="verdict" data-state="idle">
+          <span class="verdict__icon" aria-hidden="true">?</span>
+          <div><b id="verdictTitle">Not run yet</b><p id="verdictText">Run the job to reconcile it against the legacy output.</p></div>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Result views">
+          <button role="tab" aria-selected="true" aria-controls="tab-parity" id="t-parity">Parity report</button>
+          <button role="tab" aria-selected="false" aria-controls="tab-output" id="t-output">sales_by_store</button>
+          <button role="tab" aria-selected="false" aria-controls="tab-rejects" id="t-rejects">Quarantine <span class="count" id="rejCount"></span></button>
+          <button role="tab" aria-selected="false" aria-controls="tab-code" id="t-code">Generated PySpark</button>
+        </div>
+        <div class="tabpanel" role="tabpanel" id="tab-parity" aria-labelledby="t-parity"><p class="muted-p">No run yet.</p></div>
+        <div class="tabpanel" role="tabpanel" id="tab-output" aria-labelledby="t-output" hidden><p class="muted-p">No run yet.</p></div>
+        <div class="tabpanel" role="tabpanel" id="tab-rejects" aria-labelledby="t-rejects" hidden><p class="muted-p">No run yet.</p></div>
+        <div class="tabpanel" role="tabpanel" id="tab-code" aria-labelledby="t-code" hidden><pre class="code pg-code" id="genCode" tabindex="0"></pre></div>
+      </section>
+
+      <!-- ===== Challenges ===== -->
+      <aside class="panel pg-card challenges" aria-labelledby="chTitle">
+        <div class="panel__bar"><span class="tag">CHALLENGES</span><h2 class="panel__title" id="chTitle"><span id="chScore">0</span> / 7 found</h2></div>
+        <ul class="ch-list" id="challenges">
+          <li data-ch="green"><b>Clean reconciliation</b><span>Get a run with 0 mismatches.</span></li>
+          <li data-ch="lost"><b>Lose rows silently</b><span>Make a row vanish from both outputs.</span></li>
+          <li data-ch="drift"><b>Make money drift</b><span>Get totals that are off by fractions of a cent.</span></li>
+          <li data-ch="lookup"><b>Break the lookup</b><span>Make a known SKU miss the catalog.</span></li>
+          <li data-ch="inner"><b>Drop orders in a join</b><span>Lose orders whose SKU is unknown.</span></li>
+          <li data-ch="dup"><b>Double-count a day</b><span>Re-run a day and inflate the totals.</span></li>
+          <li data-ch="failfast"><b>Fail loudly</b><span>Stop the job before it writes bad data.</span></li>
+        </ul>
+        <button class="mini-btn" id="chReset" type="button">Reset challenges</button>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">Built by Bagus Budi Laksono · <a href="./">Back to the CV</a></div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="assets/playground.js" defer></script>
+</body>
+</html>

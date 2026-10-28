@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bagus Budi Laksono — CV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Print-first, ATS-friendly CV. Source for cv_bagus_budi_laksono_2026.pdf */
+    @page { size: A4; margin: 14mm 15mm; }
+    :root { --ink: #0f172a; --muted: #475569; --accent: #0e7490; --line: #e2e8f0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 9.6pt/1.45 "Inter", Arial, sans-serif; color: var(--ink); background: #fff; }
+    .page { max-width: 180mm; margin: 0 auto; }
+    @media screen { body { background: #eef1f6; padding: 24px 12px; } .page { background: #fff; padding: 14mm 15mm; box-shadow: 0 6px 30px rgba(0,0,0,.12); } }
+    header { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 8px; }
+    h1 { font-size: 22pt; margin: 0; letter-spacing: -.02em; line-height: 1.05; }
+    .title { margin: 4px 0 0; font-weight: 600; color: var(--accent); font-size: 10.5pt; }
+    .contact { text-align: right; font-size: 8.6pt; color: var(--muted); line-height: 1.5; }
+    .contact a { color: inherit; text-decoration: none; }
+    h2 { font-size: 9pt; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 14px 0 6px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+    p { margin: 0 0 6px; }
+    ul { margin: 3px 0 6px; padding-left: 14px; }
+    li { margin: 2px 0; }
+    .role { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; margin-top: 4px; }
+    .role h3 { font-size: 10.5pt; margin: 0; }
+    .role span { color: var(--muted); font-size: 8.8pt; white-space: nowrap; }
+    .sub { font-weight: 700; font-size: 9pt; margin: 8px 0 2px; }
+    .skills { display: grid; grid-template-columns: 34mm 1fr; gap: 3px 10px; margin: 0; }
+    .skills dt { font-weight: 700; }
+    .skills dd { margin: 0; color: #1e293b; }
+    .proj { margin: 0 0 7px; break-inside: avoid; }
+    .proj b { font-size: 9.6pt; }
+    .proj .meta { color: var(--muted); font-size: 8.6pt; }
+    .proj p { margin: 1px 0 0; }
+    a { color: var(--accent); }
+    .muted { color: var(--muted); }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div>
+      <h1>Bagus Budi Laksono</h1>
+      <p class="title">Lead ETL / Data Engineer · Legacy ETL Modernization (Ab Initio → Python / PySpark on Cloud)</p>
+    </div>
+    <div class="contact">
+      <a href="mailto:bagus.budil94@gmail.com">bagus.budil94@gmail.com</a><br>
+      Purwakarta, West Java, Indonesia<br>
+      <a href="https://github.com/yuzansama">github.com/yuzansama</a>
+    </div>
+  </header>
+
+  <h2>Professional Summary</h2>
+  <p>Lead ETL / Data Engineer with 7+ years of enterprise-scale data integration in telecommunications. Deep Ab Initio expertise
+    (graph development, batch &amp; continuous flow, Control Center, EME) combined with hands-on modernization of legacy ETL into
+    reliable, config-driven <b>Python / PySpark pipelines running on a cloud data platform</b>. I own the full migration path:
+    reverse-engineering legacy metadata, field-level mapping, re-implementation, <b>record-level parity validation</b> against legacy
+    output, and cloud operation with idempotent, observable jobs. I also ship full-stack products (Next.js, TypeScript, Solidity).</p>
+
+  <h2>Core Skills</h2>
+  <dl class="skills">
+    <dt>Legacy ETL</dt><dd>Ab Initio GDE (reformat, join, sort, rollup, partition, gather), DML/XFR, plans &amp; psets, Control Center, EME check-in/out &amp; dependency analysis</dd>
+    <dt>Modern data</dt><dd>Python, PySpark / Spark SQL, Pandas, PyArrow, Snowflake, Hive / HDFS, cloud object storage, SFTP / Kafka ingestion</dd>
+    <dt>Practices</dt><dd>Legacy-to-cloud migration, parity &amp; reconciliation testing, data quality &amp; quarantine, idempotent loads, lineage / DAG analysis, code generation, Shell / KSH, Git</dd>
+    <dt>Product &amp; web</dt><dd>Next.js, React, TypeScript, Tailwind CSS, Solidity / Hardhat, ethers.js, Google Apps Script, PHP</dd>
+  </dl>
+
+  <h2>Professional Experience</h2>
+  <div class="role"><h3>XL Axiata Tbk — Lead ETL Developer</h3><span>Feb 2019 – Present</span></div>
+
+  <p class="sub">Legacy ETL modernization: Ab Initio → Python / PySpark on cloud (current)</p>
+  <ul>
+    <li>Lead the migration of the legacy mediation framework (collect → parse → distribute) from Ab Initio to Python / PySpark jobs running on a cloud data platform.</li>
+    <li>Assessed an inventory of 3,300+ legacy jobs, scoped 1,300+ for migration and planned delivery in waves; flagged retirement candidates for customer sign-off.</li>
+    <li>Designed an engine-as-library architecture: shared collect / parse / distribute engines, self-contained per-feed rule modules and one unified orchestrator with dry-run and debug modes.</li>
+    <li>Built code generators that produced 4,500+ stage runners and 3,300+ runner docs directly from legacy parameter sets.</li>
+    <li>Achieved 100% record-level parity against legacy output on production feeds (e.g. 130K+ records, 39 fields, 0 mismatches), root-causing residual gaps down to defects in the legacy output itself.</li>
+    <li>Delivered distribution to Snowflake and Hive, ingestion via SFTP / file transfer, and cloud object storage integration.</li>
+  </ul>
+
+  <p class="sub">Ab Initio engineering &amp; platform</p>
+  <ul>
+    <li>Led development of enterprise-scale Ab Initio ETL solutions and settlement platforms; built and maintained complex graphs for billing, settlement, reporting and reconciliation.</li>
+    <li>Built a Python metadata reverse-engineering toolkit parsing .mp, .plan, .pset, .xfr and .dml into JSON DAGs (13-step pipeline), with interactive DAG visualizations for audit and impact analysis.</li>
+    <li>Executed validation and mapping across ~200 sandbox environments, including graph / sub-graph relationship mapping and parameter extraction.</li>
+    <li>Supported Control Center deployment, scheduling and operational validation; managed EME code (check-in/check-out, dependency analysis).</li>
+    <li>Drove automation and zero-manual-process initiatives across business domains.</li>
+  </ul>
+
+  <div class="proj">
+    <div class="role"><h3>ETL Developer → Senior ETL Developer</h3><span>Earlier roles</span></div>
+    <p>Billing migration, retailer productivity, revenue reporting and B2B settlement initiatives using Ab Initio.</p>
+  </div>
+
+  <h2>Selected Projects</h2>
+  <div class="proj">
+    <b>Ab Initio → Python / PySpark migration</b> <span class="meta">· Enterprise, ongoing (details under NDA)</span>
+    <p>Config-driven pipelines on a cloud data platform; parity-validated cut-over; 4,500+ generated runners.</p>
+  </div>
+  <div class="proj">
+    <b>ONE.Charity</b> <span class="meta">· Hackathon, 2026 · Solidity, Hardhat, OpenZeppelin, Next.js, ethers v6 · <a href="https://onecharity.vercel.app/">onecharity.vercel.app</a></span>
+    <p>Zero-fee donation platform on Ethereum (Sepolia). Milestone-based fund release after independent verification, conflict-of-interest guards, withdrawal delay and donor refunds; 38 automated contract tests including security regression tests.</p>
+  </div>
+  <div class="proj">
+    <b>Titik Asal Kopi</b> <span class="meta">· 2026 · Next.js 16, TypeScript, Tailwind v4, Google Apps Script</span>
+    <p>E-commerce site for a coffee brand: variant catalog, cart, WhatsApp checkout and order tracking backed by Google Sheets via a privacy-first API (field allow-list, enumeration-safe responses, formula-injection guard). Delivered with BRD, architecture and QA plan.</p>
+  </div>
+  <div class="proj">
+    <b>Loka Journey · Loka Global Pacific</b> <span class="meta">· 2026 · HTML/CSS/JS, PHP · <a href="https://lokaglobalpacific.com">lokaglobalpacific.com</a></span>
+    <p>Built the Loka Journey travel section: Asia tour packages and a Japan personal-shopper (jastip) catalog driven by CSV data, with admin panels and a lightweight PHP settings API.</p>
+  </div>
+
+  <h2>Education</h2>
+  <div class="role"><h3>Bachelor of Electrical Engineering — Telkom University</h3><span>2011 – 2016</span></div>
+</div>
+</body>
+</html>
