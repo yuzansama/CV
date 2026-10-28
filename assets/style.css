@@ -171,6 +171,13 @@ h1, h2, h3, h4 { line-height: 1.2; margin: 0; letter-spacing: -.02em; }
 .code .ln[data-step] { cursor: pointer; }
 .tk-k { color: #c792ea; } .tk-s { color: #c3e88d; } .tk-c { color: #637399; font-style: italic; } .tk-n { color: #f78c6c; } .tk-f { color: #82aaff; } .tk-b { color: #ffcb6b; }
 
+/* Playground call-to-action */
+.pg-cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 20px; padding: 16px 20px; border-radius: var(--radius); border: 1px dashed color-mix(in srgb, var(--accent) 55%, var(--border)); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); color: var(--text); text-decoration: none !important; transition: transform .2s, border-color .2s; }
+.pg-cta:hover { transform: translateY(-2px); border-style: solid; }
+.pg-cta__tag { font: 700 .68rem var(--mono); letter-spacing: .1em; color: var(--accent); }
+.pg-cta__txt { flex: 1 1 320px; font-size: .95rem; }
+.pg-cta__go { font-weight: 700; color: var(--accent); }
+
 /* Parity */
 .parity { margin-top: 26px; padding: 26px; }
 .parity__head { display: flex; gap: 24px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }

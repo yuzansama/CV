@@ -499,6 +499,7 @@
   const go = id => () => document.getElementById(id).scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
   const COMMANDS = [
     { label: "Legacy → PySpark walkthrough", hint: "section", run: go("migration") },
+    { label: "Pipeline playground (sandbox)", hint: "page", run: () => { window.location.href = "playground.html"; } },
     { label: "Run parity reconciliation", hint: "demo", run: () => { go("parity")(); setTimeout(() => parityBtn.click(), 500); } },
     { label: "Experience", hint: "section", run: go("experience") },
     { label: "Projects", hint: "section", run: go("projects") },
