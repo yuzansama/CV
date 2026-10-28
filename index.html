@@ -90,7 +90,7 @@
           <div class="converter__legacy panel">
             <div class="panel__bar">
               <span class="tag tag--legacy">LEGACY</span>
-              <span class="panel__title">daily_usage_rollup.mp</span>
+              <span class="panel__title">coffee_sales_summary.mp</span>
               <button class="mini-btn" id="playBtn" type="button" aria-pressed="false"><span class="play-ico" aria-hidden="true">▶</span> <span class="play-lbl">Walk through</span></button>
             </div>
             <svg class="dag" id="dag" viewBox="0 0 340 470" role="group" aria-label="Legacy ETL graph. Select a component to see its PySpark equivalent.">
@@ -107,14 +107,14 @@
                 <path class="edge" data-step="join" d="M225 271H207" marker-end="url(#arrow)"/>
               </g>
               <g class="nodes">
-                <g class="node" data-step="input" tabindex="0" role="button" aria-label="Input File: events.dat"><rect x="35" y="20" width="170" height="46" rx="10"/><text x="50" y="38" class="node__type">INPUT FILE</text><text x="50" y="56" class="node__name">events.dat</text></g>
+                <g class="node" data-step="input" tabindex="0" role="button" aria-label="Input File: orders.dat"><rect x="35" y="20" width="170" height="46" rx="10"/><text x="50" y="38" class="node__type">INPUT FILE</text><text x="50" y="56" class="node__name">orders.dat</text></g>
                 <g class="node" data-step="reformat" tabindex="0" role="button" aria-label="Reformat: clean and cast"><rect x="35" y="96" width="170" height="46" rx="10"/><text x="50" y="114" class="node__type">REFORMAT</text><text x="50" y="132" class="node__name">clean &amp; cast</text></g>
                 <g class="node" data-step="filter" tabindex="0" role="button" aria-label="Filter by Expression: valid rows"><rect x="35" y="172" width="170" height="46" rx="10"/><text x="50" y="190" class="node__type">FILTER BY EXPRESSION</text><text x="50" y="208" class="node__name">valid rows</text></g>
                 <g class="node node--side node--reject" data-step="filter" tabindex="-1" aria-hidden="true"><rect x="225" y="172" width="105" height="46" rx="10"/><text x="237" y="190" class="node__type">DESELECT</text><text x="237" y="208" class="node__name">quarantine</text></g>
-                <g class="node" data-step="join" tabindex="0" role="button" aria-label="Join: enrich with product"><rect x="35" y="248" width="170" height="46" rx="10"/><text x="50" y="266" class="node__type">JOIN</text><text x="50" y="284" class="node__name">enrich product</text></g>
-                <g class="node node--side" data-step="join" tabindex="-1" aria-hidden="true"><rect x="225" y="248" width="105" height="46" rx="10"/><text x="237" y="266" class="node__type">LOOKUP</text><text x="237" y="284" class="node__name">dim_product</text></g>
-                <g class="node" data-step="rollup" tabindex="0" role="button" aria-label="Rollup: daily aggregate"><rect x="35" y="324" width="170" height="46" rx="10"/><text x="50" y="342" class="node__type">ROLLUP</text><text x="50" y="360" class="node__name">daily aggregate</text></g>
-                <g class="node" data-step="output" tabindex="0" role="button" aria-label="Output Table: daily_usage"><rect x="35" y="400" width="170" height="46" rx="10"/><text x="50" y="418" class="node__type">OUTPUT TABLE</text><text x="50" y="436" class="node__name">daily_usage</text></g>
+                <g class="node" data-step="join" tabindex="0" role="button" aria-label="Join: add bean origin"><rect x="35" y="248" width="170" height="46" rx="10"/><text x="50" y="266" class="node__type">JOIN</text><text x="50" y="284" class="node__name">add bean origin</text></g>
+                <g class="node node--side" data-step="join" tabindex="-1" aria-hidden="true"><rect x="225" y="248" width="105" height="46" rx="10"/><text x="237" y="266" class="node__type">LOOKUP</text><text x="237" y="284" class="node__name">sku_catalog</text></g>
+                <g class="node" data-step="rollup" tabindex="0" role="button" aria-label="Rollup: sales per store"><rect x="35" y="324" width="170" height="46" rx="10"/><text x="50" y="342" class="node__type">ROLLUP</text><text x="50" y="360" class="node__name">sales per store</text></g>
+                <g class="node" data-step="output" tabindex="0" role="button" aria-label="Output Table: sales_by_store"><rect x="35" y="400" width="170" height="46" rx="10"/><text x="50" y="418" class="node__type">OUTPUT TABLE</text><text x="50" y="436" class="node__name">sales_by_store</text></g>
               </g>
             </svg>
             <div class="explain" id="explain" aria-live="polite">
@@ -125,7 +125,7 @@
           <div class="converter__spark panel">
             <div class="panel__bar">
               <span class="tag tag--spark">PYSPARK</span>
-              <span class="panel__title">daily_usage_rollup.py</span>
+              <span class="panel__title">coffee_sales_summary.py</span>
               <button class="mini-btn" id="copyCodeBtn" type="button">Copy</button>
             </div>
             <pre class="code" id="code" tabindex="0" aria-label="PySpark source code"></pre>
@@ -148,7 +148,7 @@
               <dl>
                 <div><dt>Row count</dt><dd data-target="1284512">—</dd></div>
                 <div><dt>Rejected rows</dt><dd data-target="2031">—</dd></div>
-                <div><dt>Σ total_amount</dt><dd data-target="98765432.10" data-decimals="2">—</dd></div>
+                <div><dt>Σ gross_sales</dt><dd data-target="98765432.10" data-decimals="2">—</dd></div>
                 <div><dt>Distinct keys</dt><dd data-target="412907">—</dd></div>
               </dl>
             </div>
@@ -161,7 +161,7 @@
               <dl>
                 <div><dt>Row count</dt><dd data-target="1284512">—</dd></div>
                 <div><dt>Rejected rows</dt><dd data-target="2031">—</dd></div>
-                <div><dt>Σ total_amount</dt><dd data-target="98765432.10" data-decimals="2">—</dd></div>
+                <div><dt>Σ gross_sales</dt><dd data-target="98765432.10" data-decimals="2">—</dd></div>
                 <div><dt>Distinct keys</dt><dd data-target="412907">—</dd></div>
               </dl>
             </div>
