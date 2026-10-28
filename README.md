@@ -8,7 +8,6 @@ Interactive CV website plus an updated printable CV.
 | `playground.html` | Pipeline Playground: break the demo pipeline on purpose and watch the parity check catch it |
 | `cv.html` | Print-first, ATS-friendly CV (source of the PDF) |
 | `cv_bagus_budi_laksono_2026.pdf` | Updated CV, generated from `cv.html` |
-| `cv_bagus_budi_laksono_etl.pdf` | Previous CV (kept for reference) |
 
 ## Run locally
 
