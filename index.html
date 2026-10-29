@@ -140,6 +140,12 @@
           <span class="pg-cta__go" aria-hidden="true">Open playground →</span>
         </a>
 
+        <a class="pg-cta reveal" href="https://github.com/yuzansama/legacy-etl-to-pyspark" target="_blank" rel="noopener">
+          <span class="pg-cta__tag">OPEN SOURCE</span>
+          <span class="pg-cta__txt"><b>Read the real PySpark code.</b> The same job as a tested repo: parity check against legacy output, CI on PySpark 3.5 and 4.0.</span>
+          <span class="pg-cta__go" aria-hidden="true">View on GitHub ↗</span>
+        </a>
+
         <!-- Parity -->
         <div class="parity panel reveal" id="parity">
           <div class="parity__head">
@@ -290,6 +296,10 @@
               <li><b>100%</b> parity</li>
             </ul>
             <ul class="stack"><li>Python</li><li>PySpark</li><li>Cloud data platform</li><li>Snowflake</li><li>Hive / HDFS</li><li>KSH</li></ul>
+            <div class="project__links">
+              <a href="https://github.com/yuzansama/legacy-etl-to-pyspark" target="_blank" rel="noopener">Public PySpark demo ↗</a>
+              <a href="playground.html">Playground</a>
+            </div>
           </article>
 
           <article class="project panel reveal" data-cat="data" data-skills="abinitio python dag codegen">
@@ -297,6 +307,22 @@
             <h3>Ab Initio Metadata Parser &amp; DAG Visualizer</h3>
             <p>Reverse-engineers graphs, plans and parameter sets into structured JSON in a 13-step pipeline (components, ports, flows, phases, parameters), then renders interactive DAGs for audit and impact analysis.</p>
             <ul class="stack"><li>Python</li><li>Graphviz</li><li>JSON</li><li>HTML/JS</li></ul>
+          </article>
+
+          <article class="project project--wide panel reveal" data-cat="data" data-skills="pyspark python parity testing">
+            <div class="project__top"><span class="pill pill--now">Open source</span><span class="project__year">2026</span></div>
+            <h3>legacy-etl-to-pyspark</h3>
+            <p>The migration approach above, in public code without NDA: a legacy ETL job rebuilt in PySpark, one function per legacy component, with explicit schema + FAILFAST, null-safe filtering into a quarantine, a unique-key lookup check, decimal money and idempotent partition writes. A reconciliation module proves record-level parity against the legacy output, and the tests fail if any of these guards is removed.</p>
+            <ul class="metrics">
+              <li><b>14</b> tests</li>
+              <li><b>PySpark 3.5 &amp; 4.0</b> in CI</li>
+              <li><b>0</b> mismatches vs legacy</li>
+            </ul>
+            <ul class="stack"><li>PySpark</li><li>pytest</li><li>GitHub Actions</li><li>Parquet</li></ul>
+            <div class="project__links">
+              <a href="https://github.com/yuzansama/legacy-etl-to-pyspark" target="_blank" rel="noopener">Source ↗</a>
+              <a href="https://github.com/yuzansama/legacy-etl-to-pyspark/actions/workflows/ci.yml" target="_blank" rel="noopener">CI runs ↗</a>
+            </div>
           </article>
 
           <article class="project panel reveal" data-cat="web3" data-skills="solidity nextjs react testing">

@@ -124,6 +124,7 @@
 .st--warn { color: var(--legacy); background: var(--legacy-soft); }
 .pg-note { font-size: .84rem; color: var(--muted); margin: 10px 0 0; }
 
+.pg-note--top { margin: 0 0 10px; }
 .pg-code { max-height: 560px; border-radius: 10px; }
 .pg-code .ln.is-warn { background: rgba(248, 113, 113, .13); box-shadow: inset 3px 0 0 #f87171; }
 

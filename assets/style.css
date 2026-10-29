@@ -172,6 +172,7 @@ h1, h2, h3, h4 { line-height: 1.2; margin: 0; letter-spacing: -.02em; }
 .tk-k { color: #c792ea; } .tk-s { color: #c3e88d; } .tk-c { color: #637399; font-style: italic; } .tk-n { color: #f78c6c; } .tk-f { color: #82aaff; } .tk-b { color: #ffcb6b; }
 
 /* Playground call-to-action */
+.pg-cta + .pg-cta { margin-top: 12px; }
 .pg-cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 20px; padding: 16px 20px; border-radius: var(--radius); border: 1px dashed color-mix(in srgb, var(--accent) 55%, var(--border)); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); color: var(--text); text-decoration: none !important; transition: transform .2s, border-color .2s; }
 .pg-cta:hover { transform: translateY(-2px); border-style: solid; }
 .pg-cta__tag { font: 700 .68rem var(--mono); letter-spacing: .1em; color: var(--accent); }
@@ -246,6 +247,7 @@ h1, h2, h3, h4 { line-height: 1.2; margin: 0; letter-spacing: -.02em; }
 .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .project { padding: 22px; display: flex; flex-direction: column; gap: 12px; transition: transform .25s, opacity .3s, border-color .25s, filter .3s; }
 .project:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent) 50%, var(--border)); }
+.project--wide { grid-column: 1 / -1; }
 .project--feature { grid-column: span 2; background: linear-gradient(135deg, color-mix(in srgb, var(--legacy) 9%, var(--surface)), var(--surface) 45%, color-mix(in srgb, var(--spark) 10%, var(--surface))); }
 .project h3 { font-size: 1.2rem; }
 .project p { margin: 0; color: var(--muted); font-size: .94rem; flex: 1; }
@@ -319,7 +321,7 @@ h1, h2, h3, h4 { line-height: 1.2; margin: 0; letter-spacing: -.02em; }
 @media (max-width: 640px) {
   .section { padding: 80px 0; }
   .projects, .cards { grid-template-columns: 1fr; }
-  .project--feature { grid-column: auto; }
+  .project--feature, .project--wide { grid-column: auto; }
   .timeline::before { left: 7px; }
   .tl { grid-template-columns: 1fr; gap: 10px; padding-left: 30px; }
   .tl::before { left: 1px; top: 4px; }
