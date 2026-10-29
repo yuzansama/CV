@@ -510,6 +510,7 @@
     { label: "Toggle light / dark theme", hint: "action", run: toggleTheme },
     { label: "ONE.Charity live demo", hint: "link ↗", run: () => window.open("https://onecharity.vercel.app/", "_blank", "noopener") },
     { label: "lokaglobalpacific.com", hint: "link ↗", run: () => window.open("https://lokaglobalpacific.com", "_blank", "noopener") },
+    { label: "PySpark demo repo (legacy-etl-to-pyspark)", hint: "link ↗", run: () => window.open("https://github.com/yuzansama/legacy-etl-to-pyspark", "_blank", "noopener") },
     { label: "GitHub profile", hint: "link ↗", run: () => window.open("https://github.com/yuzansama", "_blank", "noopener") },
   ];
   let pItems = [], pSel = 0, lastFocus = null;
