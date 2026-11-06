@@ -7,11 +7,11 @@
   <meta name="description" content="Lead ETL / Data Engineer. I modernize legacy ETL (Ab Initio) into reliable, testable Python & PySpark pipelines on the cloud — with record-level parity proof.">
   <meta property="og:title" content="Bagus Budi Laksono — Legacy ETL → PySpark on Cloud">
   <meta property="og:description" content="Lead ETL / Data Engineer. Ab Initio modernization, PySpark, cloud data pipelines, parity-validated migrations.">
-  <meta name="theme-color" content="#0a0e16">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0e16'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='700' font-size='28' fill='%2322d3ee'%3EBB%3C/text%3E%3C/svg%3E">
+  <meta name="theme-color" content="#0d0e0c">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233ddc97'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='700' font-size='28' fill='%2304150d'%3EBB%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
   <script>
     // Apply saved theme before paint to avoid a flash.
@@ -51,7 +51,7 @@
       <canvas class="hero__canvas" id="flowCanvas" aria-hidden="true"></canvas>
       <div class="wrap hero__inner">
         <p class="eyebrow"><span class="dot dot--live"></span> Open to data engineering roles · Purwakarta, Indonesia</p>
-        <h1 class="hero__title">Bagus Budi Laksono</h1>
+        <h1 class="hero__title" aria-label="Bagus Budi Laksono"><span class="hero__line">Bagus Budi</span><br><span class="hero__line">Laksono<span class="c-spark">.</span></span></h1>
         <p class="hero__role">Lead ETL / Data Engineer — <span class="typed" id="typed" aria-live="polite">Legacy ETL → PySpark on cloud</span><span class="caret" aria-hidden="true"></span></p>
         <p class="hero__lead">
           I take <strong class="c-legacy">legacy ETL jobs</strong> that nobody wants to touch, reverse-engineer what they really do,
@@ -73,6 +73,12 @@
         </ul>
       </div>
       <a href="#migration" class="scroll-hint" aria-label="Scroll to next section"><span></span></a>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span class="marquee__item">Ab Initio</span><span class="marquee__item">PySpark</span><span class="marquee__item">Parity tests</span><span class="marquee__item">Cloud pipelines</span><span class="marquee__item">Spark SQL</span><span class="marquee__item">CI/CD</span>
+          <span class="marquee__item">Ab Initio</span><span class="marquee__item">PySpark</span><span class="marquee__item">Parity tests</span><span class="marquee__item">Cloud pipelines</span><span class="marquee__item">Spark SQL</span><span class="marquee__item">CI/CD</span>
+        </div>
+      </div>
     </section>
 
     <!-- ============ FLAGSHIP: MIGRATION ============ -->
@@ -442,7 +448,7 @@
     <section class="section contact" id="contact">
       <div class="wrap reveal">
         <p class="kicker">Contact</p>
-        <h2>Got a legacy pipeline that needs to move?</h2>
+        <h2>Got a legacy pipeline that needs to <span class="grad">move?</span></h2>
         <p class="section__sub">Happy to talk about data engineering roles, ETL modernization or a product you want built.</p>
         <div class="contact__row">
           <button class="btn btn--primary" id="copyEmail" type="button" data-email="bagus.budil94@gmail.com">bagus.budil94@gmail.com <span aria-hidden="true">⧉</span></button>
@@ -456,7 +462,7 @@
   </main>
 
   <footer class="footer">
-    <div class="wrap">© <span id="year">2026</span> Bagus Budi Laksono · Press <kbd>⌘K</kbd> / <kbd>Ctrl K</kbd> to jump anywhere</div>
+    <div class="wrap"><span>© <span id="year">2026</span> Bagus Budi Laksono</span><span>Press <kbd>⌘K</kbd> / <kbd>Ctrl K</kbd> to jump anywhere</span></div>
   </footer>
 
   <!-- Command palette -->
@@ -481,6 +487,7 @@
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="cursor" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
 
   <script src="assets/main.js" defer></script>
 </body>

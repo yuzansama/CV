@@ -25,6 +25,64 @@
     catch (e) { toast("Copy failed. Select the text manually."); }
   }
 
+  /* ---------- Hero title: letters rise into place (CSS does the motion) ---------- */
+  (function splitTitle() {
+    const title = $(".hero__title");
+    if (!title || reduceMotion) return;
+    let i = 0;
+    const walk = node => {
+      Array.from(node.childNodes).forEach(n => {
+        if (n.nodeType === 1) return walk(n);
+        if (n.nodeType !== 3 || !n.textContent.trim()) return;
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) return frag.append(document.createTextNode(" "));
+          const word = document.createElement("span");
+          word.className = "word";
+          word.setAttribute("aria-hidden", "true");
+          [...part].forEach(ch => {
+            const c = document.createElement("span");
+            c.className = "char"; c.textContent = ch; c.style.setProperty("--i", i++);
+            word.append(c);
+          });
+          frag.append(word);
+        });
+        n.replaceWith(frag);
+      });
+    };
+    walk(title);
+  })();
+
+  /* ---------- Cursor + magnetic buttons (mouse/trackpad only) ---------- */
+  (function pointerFx() {
+    if (reduceMotion || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    const dot = $(".cursor"), ring = $(".cursor-ring");
+    if (!dot || !ring) return;
+    let x = -100, y = -100, rx = -100, ry = -100, shown = false;
+    window.addEventListener("pointermove", e => {
+      if (e.pointerType !== "mouse") return;
+      x = e.clientX; y = e.clientY;
+      if (!shown) { shown = true; rx = x; ry = y; document.body.classList.add("has-cursor"); }
+      dot.style.transform = `translate(${x}px, ${y}px)`;
+      ring.classList.toggle("is-hover", !!e.target.closest("a, button, .node, [data-step], .chip"));
+    }, { passive: true });
+    document.addEventListener("pointerleave", () => { shown = false; document.body.classList.remove("has-cursor"); });
+    (function follow() {
+      rx += (x - rx) * 0.18; ry += (y - ry) * 0.18;
+      ring.style.transform = `translate(${rx}px, ${ry}px)`;
+      requestAnimationFrame(follow);
+    })();
+    $$(".hero__cta .btn, .contact__row .btn").forEach(btn => {
+      btn.addEventListener("pointermove", e => {
+        const r = btn.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+        btn.style.transform = `translate(${dx * 0.18}px, ${dy * 0.3}px)`;
+      });
+      btn.addEventListener("pointerleave", () => { btn.style.transform = ""; });
+    });
+  })();
+
   /* ---------- Theme ---------- */
   function currentTheme() {
     return document.documentElement.dataset.theme ||
