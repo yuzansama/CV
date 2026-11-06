@@ -61,6 +61,7 @@
         <div class="hero__cta">
           <a class="btn btn--primary" href="#migration">See how I migrate a job <span aria-hidden="true">→</span></a>
           <a class="btn btn--ghost" href="playground.html">Pipeline playground</a>
+          <button class="btn btn--ghost" id="introBtn" type="button"><span aria-hidden="true">▶</span> 36-sec intro</button>
           <a class="btn btn--ghost" href="cv_bagus_budi_laksono_2026.pdf" download>Download CV (PDF)</a>
         </div>
 
@@ -464,6 +465,18 @@
     <div class="palette__box" role="dialog" aria-modal="true" aria-label="Command palette">
       <input id="paletteInput" type="text" placeholder="Type a command or section…" autocomplete="off" aria-controls="paletteList">
       <ul id="paletteList" role="listbox"></ul>
+    </div>
+  </div>
+
+  <!-- Intro video (made with Remotion, source in video/) -->
+  <div class="vmodal" id="vmodal" hidden>
+    <div class="vmodal__backdrop" data-close></div>
+    <div class="vmodal__box" role="dialog" aria-modal="true" aria-label="36-second intro video">
+      <button class="vmodal__x icon-btn" type="button" data-close aria-label="Close video">✕</button>
+      <video id="introVideo" controls playsinline preload="none" poster="assets/cv-intro-poster.jpg">
+        <source src="assets/cv-intro.mp4" type="video/mp4">
+      </video>
+      <p class="vmodal__note">Made in code with Remotion (React), no After Effects. <a href="assets/cv-intro.mp4" download>Download MP4</a></p>
     </div>
   </div>
 

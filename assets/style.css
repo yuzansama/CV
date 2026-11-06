@@ -292,6 +292,16 @@ h1, h2, h3, h4 { line-height: 1.2; margin: 0; letter-spacing: -.02em; }
 .toast { position: fixed; left: 50%; bottom: 24px; translate: -50% 20px; z-index: 90; padding: 10px 16px; border-radius: 12px; background: var(--text); color: var(--bg); font-weight: 600; font-size: .9rem; opacity: 0; pointer-events: none; transition: opacity .25s, translate .25s; }
 .toast.is-on { opacity: 1; translate: -50% 0; }
 
+/* ===== Intro video modal ===== */
+.vmodal { position: fixed; inset: 0; z-index: 85; display: grid; place-items: center; padding: 16px; }
+.vmodal[hidden] { display: none; }
+.vmodal__backdrop { position: absolute; inset: 0; background: rgba(2, 6, 12, .78); backdrop-filter: blur(4px); }
+.vmodal__box { position: relative; width: min(1100px, 100%); }
+.vmodal__box video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; background: #000; box-shadow: 0 30px 80px -20px rgba(0, 0, 0, .8); }
+.vmodal__x { position: absolute; top: -48px; right: 0; }
+.vmodal__note { margin: 10px 0 0; color: #c5cfdf; font-size: .85rem; text-align: center; }
+.vmodal__note a { color: #7dd3fc; }
+
 /* ===== Reveal ===== */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.is-in { opacity: 1; transform: none; }

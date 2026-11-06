@@ -492,6 +492,26 @@
   const emailBtn = $("#copyEmail");
   emailBtn.addEventListener("click", () => copy(emailBtn.dataset.email, "Email copied"));
 
+  /* ---------- Intro video ---------- */
+  const vmodal = $("#vmodal");
+  const introVideo = $("#introVideo");
+  let vLastFocus = null;
+  function openIntro() {
+    vLastFocus = document.activeElement;
+    vmodal.hidden = false;
+    $(".vmodal__x", vmodal).focus();
+    const p = introVideo.play();
+    if (p && p.catch) p.catch(() => { /* autoplay refused: the controls are there */ });
+  }
+  function closeIntro() {
+    introVideo.pause();
+    vmodal.hidden = true;
+    if (vLastFocus) vLastFocus.focus();
+  }
+  $("#introBtn").addEventListener("click", openIntro);
+  vmodal.addEventListener("click", e => { if (e.target.closest("[data-close]")) closeIntro(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !vmodal.hidden) closeIntro(); });
+
   /* ---------- Command palette ---------- */
   const palette = $("#palette");
   const pInput = $("#paletteInput");
@@ -510,6 +530,7 @@
     { label: "Toggle light / dark theme", hint: "action", run: toggleTheme },
     { label: "ONE.Charity live demo", hint: "link ↗", run: () => window.open("https://onecharity.vercel.app/", "_blank", "noopener") },
     { label: "lokaglobalpacific.com", hint: "link ↗", run: () => window.open("https://lokaglobalpacific.com", "_blank", "noopener") },
+    { label: "Watch the 36-second intro video", hint: "video", run: openIntro },
     { label: "Job Hunt Copilot (AI tool)", hint: "link ↗", run: () => window.open("https://claude.ai/artifact/1MjhW2zxgTR8NfwZHESVzx", "_blank", "noopener") },
     { label: "PySpark demo repo (legacy-etl-to-pyspark)", hint: "link ↗", run: () => window.open("https://github.com/yuzansama/legacy-etl-to-pyspark", "_blank", "noopener") },
     { label: "GitHub profile", hint: "link ↗", run: () => window.open("https://github.com/yuzansama", "_blank", "noopener") },
