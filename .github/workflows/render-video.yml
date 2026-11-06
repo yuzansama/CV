@@ -24,9 +24,11 @@ jobs:
       - run: npx remotion browser ensure
       - run: npm run render
       - run: npm run poster
+      - run: npm run render:vertical
       - uses: actions/upload-artifact@v4
         with:
           name: cv-intro
           path: |
             video/out/cv-intro.mp4
             video/out/cv-intro-poster.jpg
+            video/out/cv-intro-vertical.mp4

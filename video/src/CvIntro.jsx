@@ -33,6 +33,9 @@ const fadeIn = (f, start, len = 15) => interpolate(f, [start, start + len], [0, 
 const rise = (f, start, len = 20, dist = 30) => interpolate(f, [start, start + len], [dist, 0], { ...clamp, easing: ease });
 const fmt = (n, d = 0) => n.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
 
+/* The same scenes render 16:9 (site, LinkedIn) and 9:16 (Instagram Reels / Stories). */
+const useV = () => { const { width, height } = useVideoConfig(); return height > width; };
+
 /* Fonts must be loaded before any frame is captured. */
 const useFonts = () => {
   const [handle] = useState(() => delayRender("fonts"));
@@ -46,8 +49,9 @@ const useFonts = () => {
 /* Scene wrapper: fades in and out at the edges of its sequence. */
 const Scene = ({ len, children }) => {
   const f = useCurrentFrame();
+  const v = useV();
   const opacity = Math.min(fadeIn(f, 0, 12), interpolate(f, [len - 12, len], [1, 0], clamp));
-  return <AbsoluteFill style={{ opacity, padding: "90px 120px", justifyContent: "center" }}>{children}</AbsoluteFill>;
+  return <AbsoluteFill style={{ opacity, padding: v ? "250px 72px 420px" : "90px 120px", justifyContent: "center" }}>{children}</AbsoluteFill>;
 };
 
 const Kicker = ({ children, color = C.accent, delay = 0 }) => {
@@ -100,17 +104,18 @@ const Intro = ({ len }) => {
   const tag = "Legacy ETL → PySpark on cloud";
   const typed = tag.slice(0, Math.max(0, Math.floor((f - 40) / 1.6)));
   const s = spring({ frame: f - 6, fps, config: { damping: 200 } });
+  const v = useV();
   return (
     <Scene len={len}>
-      <AbsoluteFill style={{ justifyContent: "center", padding: "0 140px" }}>
+      <AbsoluteFill style={{ justifyContent: "center", padding: v ? "250px 72px 420px" : "0 140px" }}>
         <Kicker delay={4}>Lead ETL / Data Engineer · Indonesia</Kicker>
-        <div style={{ font: `800 150px/1.02 ${SANS}`, letterSpacing: "-0.045em", color: C.text, marginTop: 28, opacity: s, transform: `translateY(${(1 - s) * 40}px)` }}>
+        <div style={{ font: `800 ${v ? 140 : 150}px/1.02 ${SANS}`, letterSpacing: "-0.045em", color: C.text, marginTop: 28, opacity: s, transform: `translateY(${(1 - s) * 40}px)` }}>
           Bagus Budi Laksono
         </div>
-        <div style={{ font: `500 54px ${MONO}`, color: C.accent, marginTop: 36, minHeight: 70 }}>
-          {typed}<span style={{ display: "inline-block", width: 26, height: 56, background: C.accent, marginLeft: 6, verticalAlign: -8, opacity: Math.floor(f / 15) % 2 ? 0 : 1 }} />
+        <div style={{ font: `500 ${v ? 40 : 54}px ${MONO}`, color: C.accent, marginTop: 36, minHeight: 70 }}>
+          {typed}<span style={{ display: "inline-block", width: v ? 20 : 26, height: v ? 42 : 56, background: C.accent, marginLeft: 6, verticalAlign: -8, opacity: Math.floor(f / 15) % 2 ? 0 : 1 }} />
         </div>
-        <div style={{ font: `400 36px/1.5 ${SANS}`, color: C.muted, marginTop: 34, maxWidth: 1250, opacity: fadeIn(f, 95, 20) }}>
+        <div style={{ font: `400 ${v ? 36 : 36}px/1.5 ${SANS}`, color: C.muted, marginTop: 34, maxWidth: 1250, opacity: fadeIn(f, 95, 20) }}>
           I rebuild legacy ETL jobs as <span style={{ color: C.spark, fontWeight: 600 }}>reliable, tested PySpark pipelines</span>, and prove them with record-level parity checks.
         </div>
       </AbsoluteFill>
@@ -141,30 +146,31 @@ const Convert = ({ len }) => {
   const step = 30; // frames per component
   const t0 = 40;
   const active = Math.min(NODES.length - 1, Math.floor((f - t0) / step));
+  const v = useV();
   return (
     <Scene len={len}>
       <Kicker color={C.legacy}>Legacy component → PySpark</Kicker>
-      <div style={{ font: `800 62px/1.1 ${SANS}`, letterSpacing: "-0.03em", color: C.text, marginTop: 18, opacity: fadeIn(f, 6) }}>
+      <div style={{ font: `800 ${v ? 54 : 62}px/1.1 ${SANS}`, letterSpacing: "-0.03em", color: C.text, marginTop: 18, opacity: fadeIn(f, 6) }}>
         From a legacy ETL graph to reliable PySpark
       </div>
-      <div style={{ display: "flex", gap: 56, marginTop: 50, alignItems: "flex-start" }}>
-        <div style={{ width: 440, display: "flex", flexDirection: "column", gap: 18 }}>
+      <div style={{ display: "flex", flexDirection: v ? "column" : "row", gap: v ? 28 : 56, marginTop: v ? 36 : 50, alignItems: v ? "stretch" : "flex-start" }}>
+        <div style={v ? { display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 14 } : { width: 440, display: "flex", flexDirection: "column", gap: 18 }}>
           {NODES.map(([type, name], i) => {
             const on = f >= t0 + i * step;
             const isActive = on && i === active;
             return (
               <div key={type} style={{
-                padding: "14px 22px", borderRadius: 14, background: isActive ? "#2a2214" : C.surface2,
+                padding: v ? "12px 18px" : "14px 22px", borderRadius: 14, background: isActive ? "#2a2214" : C.surface2,
                 border: `2px solid ${isActive ? C.legacy : C.border}`, opacity: 0.35 + 0.65 * fadeIn(f, t0 + i * step - 20, 18),
                 boxShadow: isActive ? "0 0 30px rgba(245,158,11,.35)" : "none",
               }}>
-                <div style={{ font: `700 18px ${MONO}`, letterSpacing: "0.1em", color: isActive ? C.legacy : C.muted }}>{type}</div>
-                <div style={{ font: `600 30px ${SANS}`, color: C.text, marginTop: 2 }}>{name}</div>
+                <div style={{ font: `700 ${v ? 16 : 18}px ${MONO}`, letterSpacing: "0.1em", color: isActive ? C.legacy : C.muted }}>{type}</div>
+                <div style={{ font: `600 ${v ? 26 : 30}px ${SANS}`, color: C.text, marginTop: 2 }}>{name}</div>
               </div>
             );
           })}
         </div>
-        <div style={{ flex: 1, background: C.code, border: `1px solid ${C.border}`, borderRadius: 18, padding: "26px 0", minHeight: 720 }}>
+        <div style={{ flex: 1, background: C.code, border: `1px solid ${C.border}`, borderRadius: 18, padding: v ? "20px 0" : "26px 0", minHeight: v ? 0 : 720 }}>
           <div style={{ display: "flex", gap: 14, alignItems: "center", padding: "0 30px 18px", borderBottom: `1px solid ${C.border}` }}>
             <span style={{ font: `700 18px ${MONO}`, color: C.spark, background: "rgba(52,211,153,.14)", padding: "6px 10px", borderRadius: 6 }}>PYSPARK</span>
             <span style={{ font: `500 22px ${MONO}`, color: C.muted }}>coffee_sales_summary.py</span>
@@ -176,7 +182,7 @@ const Convert = ({ len }) => {
               const isActive = node === active;
               return (
                 <div key={i} style={{
-                  font: `500 25px/1.75 ${MONO}`, whiteSpace: "pre", padding: "0 30px",
+                  font: `500 ${v ? 19 : 25}px/1.75 ${MONO}`, whiteSpace: "pre", padding: v ? "0 20px" : "0 30px",
                   color: line.trim().startsWith("#") ? "#637399" : "#d6deeb",
                   background: isActive && chars > 0 ? "rgba(52,211,153,.10)" : "transparent",
                   boxShadow: isActive && chars > 0 ? `inset 5px 0 0 ${C.spark}` : "none",
@@ -196,8 +202,9 @@ const Convert = ({ len }) => {
 const METRICS = [["Row count", 1284512, 0], ["Rejected rows", 2031, 0], ["Σ gross_sales", 98765432.1, 2], ["Distinct keys", 412907, 0]];
 const Parity = ({ len }) => {
   const f = useCurrentFrame();
+  const v = useV();
   const col = (title, color, delay) => (
-    <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 18 }}>
+    <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: v ? 12 : 18 }}>
       <div style={{ font: `700 24px ${MONO}`, letterSpacing: "0.12em", color, opacity: fadeIn(f, delay) }}>{title}</div>
       {METRICS.map(([name, value, d], i) => {
         const start = 30 + i * 18;
@@ -205,7 +212,7 @@ const Parity = ({ len }) => {
         const done = p >= 1;
         return (
           <div key={name} style={{
-            display: "flex", justifyContent: "space-between", padding: "20px 26px", borderRadius: 14,
+            display: "flex", justifyContent: "space-between", padding: v ? "14px 22px" : "20px 26px", borderRadius: 14,
             background: done ? C.okFill : C.surface2, border: `2px solid ${done ? "rgba(52,211,153,.6)" : C.border}`,
           }}>
             <span style={{ font: `400 30px ${SANS}`, color: C.muted }}>{name}</span>
@@ -219,10 +226,10 @@ const Parity = ({ len }) => {
   return (
     <Scene len={len}>
       <Kicker color={C.spark}>Prove it · demo data</Kicker>
-      <div style={{ font: `800 62px/1.1 ${SANS}`, letterSpacing: "-0.03em", color: C.text, marginTop: 18 }}>
+      <div style={{ font: `800 ${v ? 54 : 62}px/1.1 ${SANS}`, letterSpacing: "-0.03em", color: C.text, marginTop: 18 }}>
         Done means the same answer as legacy
       </div>
-      <div style={{ display: "flex", gap: 60, marginTop: 56 }}>
+      <div style={{ display: "flex", flexDirection: v ? "column" : "row", gap: v ? 34 : 60, marginTop: v ? 40 : 56 }}>
         {col("LEGACY OUTPUT", C.legacy, 10)}
         {col("PYSPARK OUTPUT", C.spark, 16)}
       </div>
@@ -232,7 +239,7 @@ const Parity = ({ len }) => {
         opacity: verdict, transform: `scale(${0.96 + 0.04 * verdict})`,
       }}>
         <div style={{ width: 64, height: 64, borderRadius: 32, background: C.spark, color: "#032b1f", display: "grid", placeItems: "center", font: `800 38px ${SANS}` }}>✓</div>
-        <div style={{ font: `600 38px ${SANS}`, color: C.text }}>
+        <div style={{ font: `600 ${v ? 30 : 38}px/1.3 ${SANS}`, color: C.text }}>
           0 mismatches <span style={{ color: C.muted, fontWeight: 400 }}>across counts, checksums and a field-by-field diff</span>
         </div>
       </div>
@@ -244,23 +251,24 @@ const Parity = ({ len }) => {
 const STATS = [[7, "+", "years in enterprise ETL\n(telco scale)"], [3300, "+", "legacy jobs inventoried\nfor migration"], [4500, "+", "pipeline runners\nauto-generated"], [100, "%", "record-level parity\nvs legacy output"]];
 const Numbers = ({ len }) => {
   const f = useCurrentFrame();
+  const v = useV();
   return (
     <Scene len={len}>
       <Kicker>From real work · details under NDA</Kicker>
-      <div style={{ font: `800 62px/1.1 ${SANS}`, letterSpacing: "-0.03em", color: C.text, marginTop: 18 }}>
+      <div style={{ font: `800 ${v ? 54 : 62}px/1.1 ${SANS}`, letterSpacing: "-0.03em", color: C.text, marginTop: 18 }}>
         A telco's legacy ETL, moving to PySpark on cloud
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 28, marginTop: 90 }}>
+      <div style={{ display: "grid", gridTemplateColumns: v ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: v ? 22 : 28, marginTop: v ? 50 : 90 }}>
         {STATS.map(([n, suffix, label], i) => {
           const start = 20 + i * 14;
           const p = interpolate(f, [start, start + 45], [0, 1], { ...clamp, easing: ease });
           return (
             <div key={label} style={{
-              padding: "40px 34px", borderRadius: 22, background: C.surface, border: `2px solid ${C.border}`,
+              padding: v ? "32px 28px" : "40px 34px", borderRadius: 22, background: C.surface, border: `2px solid ${C.border}`,
               opacity: fadeIn(f, start - 6), transform: `translateY(${rise(f, start - 6, 22, 40)}px)`,
             }}>
-              <div style={{ font: `800 96px/1 ${SANS}`, letterSpacing: "-0.04em", color: C.text }}>{fmt(Math.round(n * p))}{suffix}</div>
-              <div style={{ font: `400 28px/1.4 ${SANS}`, color: C.muted, marginTop: 20, whiteSpace: "pre-line" }}>{label}</div>
+              <div style={{ font: `800 ${v ? 80 : 96}px/1 ${SANS}`, letterSpacing: "-0.04em", color: C.text }}>{fmt(Math.round(n * p))}{suffix}</div>
+              <div style={{ font: `400 ${v ? 26 : 28}px/1.4 ${SANS}`, color: C.muted, marginTop: 20, whiteSpace: "pre-line" }}>{label}</div>
             </div>
           );
         })}
@@ -280,23 +288,24 @@ const PROJECTS = [
 ];
 const Projects = ({ len }) => {
   const f = useCurrentFrame();
+  const v = useV();
   return (
     <Scene len={len}>
       <Kicker color={C.violet}>Built & building</Kicker>
-      <div style={{ font: `800 62px/1.1 ${SANS}`, letterSpacing: "-0.03em", color: C.text, marginTop: 18 }}>
+      <div style={{ font: `800 ${v ? 54 : 62}px/1.1 ${SANS}`, letterSpacing: "-0.03em", color: C.text, marginTop: 18 }}>
         Data engineering by day. Products end to end.
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 26, marginTop: 54 }}>
+      <div style={{ display: "grid", gridTemplateColumns: v ? "repeat(2, 1fr)" : "repeat(3, 1fr)", gap: v ? 18 : 26, marginTop: v ? 36 : 54 }}>
         {PROJECTS.map(([name, meta, desc, color], i) => {
           const start = 14 + i * 9;
           return (
             <div key={name} style={{
-              padding: "28px 30px", borderRadius: 20, background: C.surface, border: `2px solid ${C.border}`,
+              padding: v ? "20px 22px" : "28px 30px", borderRadius: 20, background: C.surface, border: `2px solid ${C.border}`,
               borderTop: `5px solid ${color}`, opacity: fadeIn(f, start), transform: `translateY(${rise(f, start, 22, 36)}px)`,
             }}>
-              <div style={{ font: `700 20px ${MONO}`, color, letterSpacing: "0.04em" }}>{meta}</div>
-              <div style={{ font: `800 38px/1.15 ${SANS}`, color: C.text, marginTop: 10, letterSpacing: "-0.02em" }}>{name}</div>
-              <div style={{ font: `400 26px/1.45 ${SANS}`, color: C.muted, marginTop: 12 }}>{desc}</div>
+              <div style={{ font: `700 ${v ? 16 : 20}px ${MONO}`, color, letterSpacing: "0.04em" }}>{meta}</div>
+              <div style={{ font: `800 ${v ? 29 : 38}px/1.15 ${SANS}`, color: C.text, marginTop: 10, letterSpacing: "-0.02em" }}>{name}</div>
+              <div style={{ font: `400 ${v ? 21 : 26}px/1.45 ${SANS}`, color: C.muted, marginTop: 10 }}>{desc}</div>
             </div>
           );
         })}
@@ -308,14 +317,15 @@ const Projects = ({ len }) => {
 /* ---------- 6. Outro ---------- */
 const Outro = ({ len }) => {
   const f = useCurrentFrame();
+  const v = useV();
   return (
     <Scene len={len}>
       <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-        <div style={{ font: `800 104px/1.05 ${SANS}`, letterSpacing: "-0.04em", color: C.text, opacity: fadeIn(f, 0, 18), transform: `translateY(${rise(f, 0, 22, 30)}px)` }}>
+        <div style={{ font: `800 ${v ? 86 : 104}px/1.05 ${SANS}`, letterSpacing: "-0.04em", color: C.text, opacity: fadeIn(f, 0, 18), transform: `translateY(${rise(f, 0, 22, 30)}px)` }}>
           Got a legacy pipeline<br />that needs to move?
         </div>
-        <div style={{ font: `500 44px ${MONO}`, color: C.accent, marginTop: 48, opacity: fadeIn(f, 18) }}>yuzansama.github.io/CV</div>
-        <div style={{ font: `500 34px ${MONO}`, color: C.muted, marginTop: 16, opacity: fadeIn(f, 26) }}>github.com/yuzansama</div>
+        <div style={{ font: `500 ${v ? 38 : 44}px ${MONO}`, color: C.accent, marginTop: 48, opacity: fadeIn(f, 18) }}>yuzansama.github.io/CV</div>
+        <div style={{ font: `500 ${v ? 30 : 34}px ${MONO}`, color: C.muted, marginTop: 16, opacity: fadeIn(f, 26) }}>github.com/yuzansama</div>
       </AbsoluteFill>
     </Scene>
   );

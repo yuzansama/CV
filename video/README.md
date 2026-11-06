@@ -1,6 +1,6 @@
 # CV intro video
 
-A 36-second, 1920×1080 intro for the CV site and LinkedIn, written as React code with
+A 36-second intro, 1920×1080 for the CV site and LinkedIn and 1080×1920 for Instagram Reels / Stories, written as React code with
 [Remotion](https://www.remotion.dev/). No After Effects: every frame comes from `src/CvIntro.jsx`.
 
 Scenes: intro → legacy ETL graph turning into PySpark → parity check (demo numbers) →
@@ -12,6 +12,7 @@ npm ci
 npm run studio            # live preview in the browser
 npm run render            # out/cv-intro.mp4
 npm run poster            # out/cv-intro-poster.jpg
+npm run render:vertical   # out/cv-intro-vertical.mp4 (9:16, content kept clear of Instagram's top and bottom UI)
 npm run publish-to-site   # copy both into ../assets/ (the site plays assets/cv-intro.mp4)
 ```
 

@@ -6,7 +6,9 @@
     "studio": "remotion studio src/index.jsx",
     "render": "remotion render src/index.jsx CvIntro out/cv-intro.mp4 --crf=23 --color-space=bt709",
     "poster": "remotion still src/index.jsx CvIntro out/cv-intro-poster.jpg --frame=110 --image-format=jpeg --jpeg-quality=85",
-    "publish-to-site": "cp out/cv-intro.mp4 out/cv-intro-poster.jpg ../assets/"
+    "publish-to-site": "cp out/cv-intro.mp4 out/cv-intro-poster.jpg out/cv-intro-vertical.mp4 ../assets/",
+    "render:vertical": "remotion render src/index.jsx CvIntroVertical out/cv-intro-vertical.mp4 --crf=23 --color-space=bt709",
+    "poster:vertical": "remotion still src/index.jsx CvIntroVertical out/cv-intro-vertical-poster.jpg --frame=110 --image-format=jpeg --jpeg-quality=85"
   },
   "dependencies": {
     "@fontsource/inter": "5.3.0",
