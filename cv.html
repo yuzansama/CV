@@ -9,10 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     /* Print-first, ATS-friendly CV. Source for cv_bagus_budi_laksono_2026.pdf */
-    @page { size: A4; margin: 14mm 15mm; }
+    @page { size: A4; margin: 12mm 15mm; }
     :root { --ink: #0f172a; --muted: #475569; --accent: #0e7490; --line: #e2e8f0; }
     * { box-sizing: border-box; }
-    body { margin: 0; font: 9.6pt/1.45 "Inter", Arial, sans-serif; color: var(--ink); background: #fff; }
+    body { margin: 0; font: 9.6pt/1.42 "Inter", Arial, sans-serif; color: var(--ink); background: #fff; }
     .page { max-width: 180mm; margin: 0 auto; }
     @media screen { body { background: #eef1f6; padding: 24px 12px; } .page { background: #fff; padding: 14mm 15mm; box-shadow: 0 6px 30px rgba(0,0,0,.12); } }
     header { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 8px; }
@@ -20,14 +20,14 @@
     .title { margin: 4px 0 0; font-weight: 600; color: var(--accent); font-size: 10.5pt; }
     .contact { text-align: right; font-size: 8.6pt; color: var(--muted); line-height: 1.5; }
     .contact a { color: inherit; text-decoration: none; }
-    h2 { font-size: 9pt; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 14px 0 6px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
+    h2 { font-size: 9pt; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 11px 0 5px; padding-bottom: 3px; border-bottom: 1px solid var(--line); }
     p { margin: 0 0 6px; }
     ul { margin: 3px 0 6px; padding-left: 14px; }
-    li { margin: 2px 0; }
+    li { margin: 1px 0; }
     .role { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; margin-top: 4px; }
     .role h3 { font-size: 10.5pt; margin: 0; }
     .role span { color: var(--muted); font-size: 8.8pt; white-space: nowrap; }
-    .sub { font-weight: 700; font-size: 9pt; margin: 8px 0 2px; }
+    .sub { font-weight: 700; font-size: 9pt; margin: 7px 0 2px; }
     .skills { display: grid; grid-template-columns: 34mm 1fr; gap: 3px 10px; margin: 0; }
     .skills dt { font-weight: 700; }
     .skills dd { margin: 0; color: #1e293b; }
@@ -93,28 +93,6 @@
   <div class="proj">
     <div class="role"><h3>ETL Developer → Senior ETL Developer</h3><span>Earlier roles</span></div>
     <p>Billing migration, retailer productivity, revenue reporting and B2B settlement initiatives using Ab Initio.</p>
-  </div>
-
-  <h2>Selected Projects</h2>
-  <div class="proj">
-    <b>Ab Initio → Python / PySpark migration</b> <span class="meta">· Enterprise, ongoing (details under NDA)</span>
-    <p>Config-driven pipelines on a cloud data platform; parity-validated cut-over; 4,500+ generated runners.</p>
-  </div>
-  <div class="proj">
-    <b>legacy-etl-to-pyspark</b> <span class="meta">· Open source, 2026 · <a href="https://github.com/yuzansama/legacy-etl-to-pyspark">github.com/yuzansama/legacy-etl-to-pyspark</a></span>
-    <p>NDA-free demo of my migration approach: a legacy ETL job rebuilt in PySpark (explicit schema, null-safe filter with quarantine, unique-key lookup check, decimal money, idempotent partition writes) with a record-level parity check against legacy output; CI on PySpark 3.5 and 4.0.</p>
-  </div>
-  <div class="proj">
-    <b>ONE.Charity</b> <span class="meta">· Hackathon, 2026 · Solidity, Hardhat, OpenZeppelin, Next.js, ethers v6 · <a href="https://onecharity.vercel.app/">onecharity.vercel.app</a></span>
-    <p>Zero-fee donation platform on Ethereum (Sepolia). Milestone-based fund release after independent verification, conflict-of-interest guards, withdrawal delay and donor refunds; 38 automated contract tests including security regression tests.</p>
-  </div>
-  <div class="proj">
-    <b>Titik Asal Kopi</b> <span class="meta">· 2026 · Next.js 16, TypeScript, Tailwind v4, Google Apps Script</span>
-    <p>E-commerce site for a coffee brand: variant catalog, cart, WhatsApp checkout and order tracking backed by Google Sheets via a privacy-first API (field allow-list, enumeration-safe responses, formula-injection guard). Delivered with BRD, architecture and QA plan.</p>
-  </div>
-  <div class="proj">
-    <b>Loka Journey · Loka Global Pacific</b> <span class="meta">· 2026 · HTML/CSS/JS, PHP · <a href="https://lokaglobalpacific.com">lokaglobalpacific.com</a></span>
-    <p>Built the Loka Journey travel section: Asia tour packages and a Japan personal-shopper (jastip) catalog driven by CSV data, with admin panels and a lightweight PHP settings API.</p>
   </div>
 
   <h2>Education</h2>
