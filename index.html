@@ -379,6 +379,29 @@
             </div>
             <p class="project__note">Needs a claude.ai account. Visitors get a demo that saves nothing.</p>
           </article>
+
+          <article class="project project--feature panel reveal" data-cat="ai" data-skills="python claude testing">
+            <div class="project__top"><span class="pill pill--now">AI agent · live</span><span class="project__year">2026</span></div>
+            <h3>AI Dari Nol <span class="at">· a YouTube channel run by an agent</span></h3>
+            <p>An experiment in letting an AI agent grow a YouTube channel from zero. Each episode is a JSON file; Python renders it into a video with narration, captions and a thumbnail, and uploads it privately with a scheduled publish time through the YouTube Data API. A daily agent syncs every video's status, snapshots analytics, fills open slots from the queue within the upload quota, and writes a report that flags weak hooks and a thin queue; new episodes are written from those reports. Alongside it: animated science-explainer Shorts drawn entirely in code, with narration, an original score and burned-in captions.</p>
+            <ul class="metrics">
+              <li><b>1 JSON</b> = 1 video</li>
+              <li><b>Daily</b> unattended run</li>
+              <li><b>Long + Shorts</b> on a schedule</li>
+            </ul>
+            <ul class="stack"><li>Python</li><li>YouTube Data &amp; Analytics API</li><li>OAuth</li><li>ffmpeg</li><li>edge-tts</li><li>Claude</li></ul>
+            <p class="project__note">Private repo. Videos upload as private and go public at their scheduled time.</p>
+          </article>
+
+          <article class="project panel reveal" data-cat="web" data-skills="htmljs testing">
+            <div class="project__top"><span class="pill">PWA</span><span class="project__year">2026</span></div>
+            <h3>Dompetku</h3>
+            <p>Offline-first personal finance app in Rupiah: income and expenses, monthly summaries, savings targets, daily reminders and receipt photos (compressed, stored in IndexedDB). Local accounts with salted password hashes, a ZIP export written from scratch, and no backend. Unit tests plus a headless-Chrome run through every row of the PRD's feature table.</p>
+            <ul class="stack"><li>Vanilla JS</li><li>Service worker</li><li>IndexedDB</li><li>Node tests</li></ul>
+            <div class="project__links">
+              <a href="https://github.com/yuzansama/dompetku" target="_blank" rel="noopener">Source ↗</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
