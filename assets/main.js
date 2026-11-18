@@ -591,7 +591,8 @@
     { label: "Watch the 36-second intro video", hint: "video", run: openIntro },
     { label: "Job Hunt Copilot (AI tool)", hint: "link ↗", run: () => window.open("https://claude.ai/artifact/1MjhW2zxgTR8NfwZHESVzx", "_blank", "noopener") },
     { label: "PySpark demo repo (legacy-etl-to-pyspark)", hint: "link ↗", run: () => window.open("https://github.com/yuzansama/legacy-etl-to-pyspark", "_blank", "noopener") },
-    { label: "Dompetku (finance PWA)", hint: "link ↗", run: () => window.open("https://github.com/yuzansama/dompetku", "_blank", "noopener") },
+    { label: "AI Dari Nol: watch episode 1", hint: "video ↗", run: () => window.open("https://www.youtube.com/watch?v=N2EHi15d6DU", "_blank", "noopener") },
+    { label: "Dompetku (finance PWA)", hint: "link ↗", run: () => window.open("https://yuzansama.github.io/dompetku/", "_blank", "noopener") },
     { label: "GitHub profile", hint: "link ↗", run: () => window.open("https://github.com/yuzansama", "_blank", "noopener") },
   ];
   let pItems = [], pSel = 0, lastFocus = null;
