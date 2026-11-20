@@ -291,6 +291,7 @@
           <button class="chip" data-filter="web3" aria-pressed="false">Web3</button>
           <button class="chip" data-filter="web" aria-pressed="false">Web products</button>
           <button class="chip" data-filter="ai" aria-pressed="false">AI tools</button>
+          <button class="chip" data-filter="bounty" aria-pressed="false">AI bounties</button>
         </div>
 
         <div class="projects" id="projectGrid">
@@ -382,14 +383,14 @@
 
           <article class="project project--feature panel reveal" data-cat="ai" data-skills="python claude testing">
             <div class="project__top"><span class="pill pill--now">AI agent · live</span><span class="project__year">2026</span></div>
-            <h3>AI Dari Nol <span class="at">· a YouTube channel run by an agent</span></h3>
-            <p>An experiment in letting an AI agent grow a YouTube channel from zero. Each episode is a JSON file; Python renders it into a video with narration, captions and a thumbnail, and uploads it privately with a scheduled publish time through the YouTube Data API. A daily agent syncs every video's status, snapshots analytics, fills open slots from the queue within the upload quota, and writes a report that flags weak hooks and a thin queue; new episodes are written from those reports. Alongside it: animated science-explainer Shorts drawn entirely in code, with narration, an original score and burned-in captions.</p>
+            <h3>AI Dari Nol <span class="at">· YouTube channels run by an agent</span></h3>
+            <p>An experiment in letting an AI agent grow a YouTube channel from zero. Each episode is a JSON file; Python renders it into a video with narration, captions and a thumbnail, and uploads it privately with a scheduled publish time through the YouTube Data API. A daily agent syncs every video's status, snapshots analytics, fills open slots from the queue within the upload quota, and writes a report that flags weak hooks and a thin queue; new episodes are written from those reports. Alongside it: animated science-explainer Shorts drawn entirely in code, with narration, an original score and burned-in captions. Now growing to a second channel of vertical clips cut from Creative Commons sources (GPU Whisper word timestamps, licence check on fetch), with a multi-channel uploader that keeps one OAuth token per channel in SQLite and refuses to upload unless the token's channel ID matches.</p>
             <ul class="metrics">
               <li><b>1 JSON</b> = 1 video</li>
               <li><b>Daily</b> unattended run</li>
-              <li><b>Long + Shorts</b> on a schedule</li>
+              <li><b>2</b> channels, verified per token</li>
             </ul>
-            <ul class="stack"><li>Python</li><li>YouTube Data &amp; Analytics API</li><li>OAuth</li><li>ffmpeg</li><li>edge-tts</li><li>Claude</li></ul>
+            <ul class="stack"><li>Python</li><li>YouTube Data &amp; Analytics API</li><li>OAuth</li><li>SQLite</li><li>ffmpeg</li><li>Whisper</li><li>edge-tts</li><li>Claude</li></ul>
             <div class="project__links">
               <a href="https://www.youtube.com/watch?v=N2EHi15d6DU" target="_blank" rel="noopener">Watch episode 1 ↗</a>
             </div>
@@ -406,6 +407,44 @@
               <a href="https://github.com/yuzansama/dompetku" target="_blank" rel="noopener">Source ↗</a>
             </div>
             <p class="project__note">Tap “Coba tanpa akun” to try it with sample data; everything stays in your browser.</p>
+          </article>
+
+          <article class="project panel reveal" data-cat="bounty" data-skills="typescript testing claude">
+            <div class="project__top"><span class="pill">make.fun bounty</span><span class="project__year">2026</span></div>
+            <h3>Git forge in one process</h3>
+            <p>A GitHub-compatible git server in a single Node 22 process with no dependencies and no git binary. One in-memory store serves four surfaces: git smart HTTP (protocol v2 upload-pack with shallow fetches, receive-pack), the REST v3 API, the GraphQL v4 API and an MCP endpoint.</p>
+            <ul class="stack"><li>Node 22</li><li>TypeScript</li><li>git protocol</li><li>GraphQL</li><li>MCP</li></ul>
+            <div class="project__links"><a href="https://github.com/yuzansama/github-core-clone-01-entry" target="_blank" rel="noopener">Source ↗</a></div>
+          </article>
+
+          <article class="project panel reveal" data-cat="bounty" data-skills="htmljs python claude">
+            <div class="project__top"><span class="pill">make.fun bounty</span><span class="project__year">2026</span></div>
+            <h3>Token Radar</h3>
+            <p>A data model on a sealed DefiLlama snapshot: finds protocols with no token yet and ranks them by implied value (a size curve fitted on comparables that already trade, times TVL growth and seasoning), each with a costed farm plan. One model file feeds both the batch job and the static page, so they cannot disagree.</p>
+            <ul class="stack"><li>Data modelling</li><li>JavaScript</li><li>Node</li><li>Static dashboard</li></ul>
+            <div class="project__links"><a href="https://github.com/yuzansama/token-radar-01-entry" target="_blank" rel="noopener">Source ↗</a></div>
+          </article>
+
+          <article class="project panel reveal" data-cat="bounty" data-skills="htmljs claude">
+            <div class="project__top"><span class="pill">make.fun bounty</span><span class="project__year">2026</span></div>
+            <h3>MARAZUL HEAT</h3>
+            <p>An original open-world crime game in the browser: a 144-block island city with traffic that obeys lights, pedestrians, a five-star wanted system, eight story missions, races and collectibles, a minimap HUD, saves, and every sound and all three radio stations synthesised in Web Audio. Three.js is the only library.</p>
+            <ul class="stack"><li>Three.js</li><li>JavaScript</li><li>Web Audio</li></ul>
+            <div class="project__links"><a href="https://github.com/yuzansama/gta6-01-entry" target="_blank" rel="noopener">Source ↗</a></div>
+          </article>
+
+          <article class="project project--wide panel reveal" data-cat="bounty" data-skills="python htmljs typescript claude">
+            <div class="project__top"><span class="pill pill--now">AI-agent builds</span><span class="project__year">Nov 2026</span></div>
+            <h3>More make.fun bounty entries</h3>
+            <p>make.fun runs competitions where an AI coding agent builds the software and the repo is submitted with the session transcripts. I pick the bounty, steer the agent, review and test the result, and ship it.</p>
+            <ul class="bounties">
+              <li><b>Trophy rarity forecast</b><span>Week-one earn rate per trophy as five quantiles: a recency-weighted logit trend on log-time, blended with per-trophy priors. Python stdlib, deterministic.</span><a href="https://github.com/yuzansama/gta6-trophy-rarity-forecast-01-entry" target="_blank" rel="noopener">Source ↗</a></li>
+              <li><b>Tiny chess engine</b><span>Under 4 KB of LZMA-packed Python: alpha-beta with transposition table, null move, late-move reductions and quiescence.</span><a href="https://github.com/yuzansama/tiny-chess-01-entry" target="_blank" rel="noopener">Source ↗</a></li>
+              <li><b>Neon Coast</b><span>Offline cover-art maker: crop your photos into panel layouts, posterise and colour-grade them on a 2D canvas, export PNG. Photos never leave the browser.</span><a href="https://github.com/yuzansama/gta6-cover-art-01-entry" target="_blank" rel="noopener">Source ↗</a></li>
+              <li><b>Leonida Legend</b><span>Offline trophy guide and tracker; every tip is tagged official, precedent or verify, with its source.</span><a href="https://github.com/yuzansama/gta6-trophy-guide-01-entry" target="_blank" rel="noopener">Source ↗</a></li>
+              <li><b>Front page in code</b><span>A news front page drawn by one dependency-free program: its own anti-aliased rasteriser, stroke font and PNG writer; byte-identical across runs.</span><a href="https://github.com/yuzansama/news-image-20261119-entry" target="_blank" rel="noopener">Source ↗</a></li>
+              <li><b>make.fun quickstart</b><span>A tested plain-English walkthrough of entering a bounty with a coding agent, including the checks that reject entries.</span><a href="https://github.com/yuzansama/makefun-quickstart" target="_blank" rel="noopener">Source ↗</a></li>
+            </ul>
           </article>
         </div>
       </div>
@@ -463,6 +502,8 @@
               <button class="chip" data-skill="solidity">Solidity / Hardhat</button>
               <button class="chip" data-skill="appsscript">Google Apps Script</button>
               <button class="chip" data-skill="htmljs">HTML / CSS / JS</button>
+              <button class="chip" data-skill="htmljs">Three.js / Web Audio</button>
+              <button class="chip" data-skill="typescript">Node.js</button>
               <button class="chip" data-skill="claude">Claude / LLM apps</button>
               <button class="chip" data-skill="php">PHP</button>
             </div>

@@ -514,7 +514,7 @@
     clearSkill();
     filterBtns.forEach(b => { b.classList.toggle("is-on", b === btn); b.setAttribute("aria-pressed", String(b === btn)); });
     const f = btn.dataset.filter;
-    projects.forEach(p => p.classList.toggle("is-hidden", f !== "all" && p.dataset.cat !== f));
+    projects.forEach(p => p.classList.toggle("is-hidden", f !== "all" && !p.dataset.cat.split(" ").includes(f)));
   }));
 
   /* ---------- Skill → project highlighting ---------- */
@@ -593,6 +593,7 @@
     { label: "PySpark demo repo (legacy-etl-to-pyspark)", hint: "link ↗", run: () => window.open("https://github.com/yuzansama/legacy-etl-to-pyspark", "_blank", "noopener") },
     { label: "AI Dari Nol: watch episode 1", hint: "video ↗", run: () => window.open("https://www.youtube.com/watch?v=N2EHi15d6DU", "_blank", "noopener") },
     { label: "Dompetku (finance PWA)", hint: "link ↗", run: () => window.open("https://yuzansama.github.io/dompetku/", "_blank", "noopener") },
+    { label: "Git forge in one process (make.fun bounty)", hint: "link ↗", run: () => window.open("https://github.com/yuzansama/github-core-clone-01-entry", "_blank", "noopener") },
     { label: "GitHub profile", hint: "link ↗", run: () => window.open("https://github.com/yuzansama", "_blank", "noopener") },
   ];
   let pItems = [], pSel = 0, lastFocus = null;
